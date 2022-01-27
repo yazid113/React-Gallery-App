@@ -1,19 +1,16 @@
 import React from "react";
-import Nav from 'react-bootstrap/Nav';
+
 
 const NavBar = () =>(
 
-<Nav  className="main-nav" defaultActiveKey="/home" as="ul">
-  <Nav.Item as="li">
-    <Nav.Link href="/home">Active</Nav.Link>
-  </Nav.Item>
-  <Nav.Item as="li">
-    <Nav.Link eventKey="link-1">Link</Nav.Link>
-  </Nav.Item>
-  <Nav.Item as="li">
-    <Nav.Link eventKey="link-2">Link</Nav.Link>
-  </Nav.Item>
-</Nav>
+  <nav className="main-nav">
+        <ul>
+          <li><a href='#'>Cats</a></li>
+          <li><a href='#'>Dogs</a></li>
+          <li><a href='#'>Computers</a></li>
+        </ul>
+      </nav>
+
 )
 
 export default NavBar
