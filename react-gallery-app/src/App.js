@@ -1,54 +1,28 @@
-import PhotoContainer from './Components/PhotoContainer';
-import SearchBar from "./Components/SearchBar";
-import NavBar from "./Components/NavBar";
-import { Component } from "react";
-import axios from 'axios'
-import apiKey from './config';
-
-class App extends Component {
-
-  state = {
-    photos: [],
-    loading: true
-  }
+import React from 'react';
+import {
+  BrowserRouter,
+  Route,
+  Switch
+} from 'react-router-dom';
+import Home from './Components/Home';
+import NoPhoto from './Components/NoPhoto';
 
 
-  componentDidMount(){
-    this.preformSearch();
-  }
 
-  preformSearch = (query = 'cats') =>{
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
-    .then(response => {
-      this.setState({
-        photos: response.data.photos.photo,
-        loading: false
-      })
-      console.log(this.state.photos)
-    })
-    .catch(error => {
-    console.log('Error fetching and parsing data', error);
-      });
-    }
-
-  render(){
-    return (
-      <div className="container">
-        <SearchBar onSearch = {this.preformSearch}/>
-      
-        <NavBar />
-        <h2>Results</h2>
-        <div className='photo-container'>
-        {
-          (this.state.loading)?<p><strong>Loading...</strong></p>:<PhotoContainer data = {this.state.photos}/>
-        }
-          
-        </div>
-        
-
-      </div>
-    );
-  }
-}
+const App = () => (
+  <BrowserRouter>
+    <div className="container">
+      <Switch>
+        <Route exact path="/" component={Home}/>
+        {/* <Route path="/about" render={ () => <About />}/>
+        <Route exact path="/teachers" component={Teachers}/>
+        <Route path="/teachers/:topic/:name" component={Featured}/>
+        <Route path="/courses" component={Courses}/>*/}
+      <Route component={NoPhoto}/> 
+      </Switch>
+    </div>
+  </BrowserRouter>
+  
+);
 
 export default App;

@@ -1,16 +1,17 @@
 import React from "react";
-
+import { NavLink } from 'react-router-dom';
 
 const NavBar = () =>(
 
   <nav className="main-nav">
         <ul>
-          <li><a href='#'>Cats</a></li>
-          <li><a href='#'>Dogs</a></li>
-          <li><a href='#'>Computers</a></li>
+          <li><NavLink exact to="#">Sky</NavLink></li>
+          <li><NavLink to="#">Pawn</NavLink></li>
+          <li><NavLink to="#">Computers</NavLink></li>
         </ul>
       </nav>
 
 )
 
 export default NavBar
+
