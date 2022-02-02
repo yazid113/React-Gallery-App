@@ -5,9 +5,9 @@ const NavBar = () =>(
 
   <nav className="main-nav">
         <ul>
-          <li><NavLink exact to="#">Sky</NavLink></li>
-          <li><NavLink to="#">Pawn</NavLink></li>
-          <li><NavLink to="#">Computers</NavLink></li>
+          <li><NavLink to="/football">Football</NavLink></li>
+          <li><NavLink to="/computers">Computers</NavLink></li>
+          <li><NavLink to="/javascript">Javascript</NavLink></li>
         </ul>
       </nav>
 
