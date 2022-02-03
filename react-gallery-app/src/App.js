@@ -2,24 +2,25 @@ import React, { Component } from 'react';
 import {
   BrowserRouter,
   Route,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router-dom';
 import NoPhoto from './Components/NoPhoto';
-import PhotoContainer from "./PhotoContainer";
-import SearchBar from "./SearchBar";
-import NavBar from "./NavBar";
+import PhotoContainer from "./Components/PhotoContainer";
+import SearchBar from "./Components/SearchBar";
+import NavBar from "./Components/NavBar";
 import axios from 'axios'
 import apiKey from './config';
+
 
 
 class App extends Component  {
 
   state = {
-    photos: [],
-    football: [],
-    computers: [],
-    javascript: [],
-    title: null,
+    photos: {array:[], title: null},
+    football: {array:[], title: null},
+    computers: {array:[], title: null},
+    javascript: {array:[], title: null},
     loading: true
   }
 
@@ -35,30 +36,28 @@ class App extends Component  {
     .then(response => {
       if (query === `football`) {
         this.setState({
-          football: response.data.photos.photo,
+          football: {array:response.data.photos.photo, title: `Football`},
           loading: false,
-          title: `Football`
+          
         })
       }
       else if (query === `computers`) {
         this.setState({
-          computers: response.data.photos.photo,
-          loading: false,
-          title: `Computers`
+          computers: {array:response.data.photos.photo, title: `Computers`},
+          loading: false
+          
         })
       }
       else if (query === `javascript`) {
         this.setState({
-          javascript: response.data.photos.photo,
-          loading: false,
-          title: `Javascript`
+          javascript: {array:response.data.photos.photo, title: `Javascript`},
+          loading: false
         })
       }
       else{
         this.setState({
-        photos: response.data.photos.photo,
-        loading: false,
-        title: query
+        photos: {array:response.data.photos.photo, title: query},
+        loading: false
 
       })}
       console.log(this.state.photos)
@@ -77,24 +76,26 @@ class App extends Component  {
 
   <BrowserRouter>
     <div className="container">
-
+      
       <SearchBar onSearch = {this.preformSearch}/>
       
       <NavBar />
-      {
-          (this.state.loading)
-          ?<p><strong>Loading...</strong></p>:
         
-      <Switch>
-        <Route exact path="/" render={ () => <PhotoContainer data = {this.state.football}/>}/>
-        <Route path="/football" render={ () => <PhotoContainer data = {this.state.football}/>}/>
-        {/*<Route exact path="/teachers" component={Teachers}/>
-        <Route path="/teachers/:topic/:name" component={Featured}/>
-        <Route path="/courses" component={Courses}/>*/}
-      <Route component={NoPhoto}/> 
-      </Switch>
-      }
-    </div>
+        {
+            (this.state.loading)
+            ?<p><strong>Loading...</strong></p>:
+          
+        <Switch>
+          <Route exact path="/" render={ () => <Redirect to='/football'/>}/>
+          <Route path="/football" render={ () => <PhotoContainer data = {this.state.football.array} title = {this.state.football.title}/>}/>
+          <Route path="/computers" render={ () => <PhotoContainer data = {this.state.computers.array} title = {this.state.computers.title}/>}/>
+          <Route path="/javascript" render={ () => <PhotoContainer data = {this.state.javascript.array} title = {this.state.javascript.title}/>}/>
+          <Route path="/search" render={ () => <PhotoContainer data = {this.state.photos.array} title = {this.state.photos.title}/>}/>
+          <Route component={NoPhoto}/> 
+        </Switch>
+        }
+        </div>
+    
   </BrowserRouter>
 
   )}}      

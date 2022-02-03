@@ -11,7 +11,7 @@ const PhotoContainer = (props) => {
       <Photo 
         url = { `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg` }
         key = { photo.id }
-
+        title = {photo.title}
         />
     )
   }
@@ -22,9 +22,13 @@ const PhotoContainer = (props) => {
   
 
   return(
-    <ul>
-        {photos}
-    </ul> 
+    
+  <div className="photo-container">
+      <h2>Photos of {props.title}</h2>
+        <ul>
+            { photos }
+        </ul>
+  </div>
   );
 }
 
