@@ -60,7 +60,7 @@ class App extends Component  {
         loading: false
 
       })}
-      console.log(this.state.photos)
+     
     })
     .catch(error => {
     console.log('Error fetching and parsing data', error);
@@ -90,7 +90,7 @@ class App extends Component  {
           <Route path="/football" render={ () => <PhotoContainer data = {this.state.football.array} title = {this.state.football.title}/>}/>
           <Route path="/computers" render={ () => <PhotoContainer data = {this.state.computers.array} title = {this.state.computers.title}/>}/>
           <Route path="/javascript" render={ () => <PhotoContainer data = {this.state.javascript.array} title = {this.state.javascript.title}/>}/>
-          <Route path="/search" render={ () => <PhotoContainer data = {this.state.photos.array} title = {this.state.photos.title}/>}/>
+          <Route path="/search/:query" render={ () => <PhotoContainer data = {this.state.photos.array} title = {this.state.photos.title}/>}/>
           <Route component={NoPhoto}/> 
         </Switch>
         }

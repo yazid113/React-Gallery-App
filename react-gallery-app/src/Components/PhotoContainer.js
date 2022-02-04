@@ -1,6 +1,7 @@
 import React from 'react';
 import Photo from './Photo';
 import NoPhoto from './NoPhoto';
+import { withRouter } from "react-router-dom";
 
 
 const PhotoContainer = (props) => { 
@@ -32,4 +33,4 @@ const PhotoContainer = (props) => {
   );
 }
 
-export default PhotoContainer;
+export default withRouter(PhotoContainer);
